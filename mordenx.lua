@@ -56,7 +56,6 @@ local user_opts = {
     keyboardnavigation = false, -- enable directional keyboard navigation
     chapter_fmt = "Chapter: %s", -- chapter print format for seekbar-hover. "no" to disable
 }
-opt.read_options(user_opts, "mordenx")
 
 -- Icons for jump button depending on jumpamount 
 local jumpicons = { 
