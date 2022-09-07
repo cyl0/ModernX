@@ -110,6 +110,21 @@ local language = {
 		nolist = '无列表信息',
 		chapter = '章节',
 		nochapter = '无章节信息',
+	},
+	['pl'] = {
+	    welcome = '{\\fs24\\1c&H0&\\1c&HFFFFFF&}Upuść plik lub łącze URL do odtworzenia.',  -- this text appears when mpv starts
+		off = 'WYŁ.',
+		na = 'n/a',
+		none = 'nic',
+		video = 'Wideo',
+		audio = 'Ścieżka audio',
+		subtitle = 'Napisy',
+		available = 'Dostępne ',
+		track = ' Ścieżki:',
+		playlist = 'Lista odtwarzania',
+		nolist = 'Lista odtwarzania pusta.',
+		chapter = 'Rozdział',
+		nochapter = 'Brak rozdziałów.',
 	}
 }
 -- read options from config and command-line
