@@ -191,6 +191,12 @@ local state = {
     chapter_list = {},                      -- sorted by time
 }
 
+local thumbfast = {
+    width = 0,
+    height = 0,
+    disabled = false
+}
+
 local window_control_box_width = 138
 local tick_delay = 0.03
 
@@ -784,6 +790,23 @@ function render_elements(master_ass)
                     elem_ass:append(slider_lo.tooltip_style)
                     ass_append_alpha(elem_ass, slider_lo.alpha, 0)
                     elem_ass:append(tooltiplabel)
+                    
+                    --thumbnail
+                    if not thumbfast.disabled and thumbfast.width ~= 0 and thumbfast.height ~= 0 then
+                        local osd_w = mp.get_property_number("osd-dimensions/w")
+                        if osd_w then
+                            local r_w, r_h = get_virt_scale_factor()
+                            mp.commandv("script-message-to", "thumbfast", "thumb",
+                                mp.get_property_number("duration", 0) * (sliderpos / 100),
+                                math.min(osd_w - thumbfast.width - 10, math.max(10, tx / r_w - thumbfast.width / 2)),
+                                ((ty - 18) / r_h - thumbfast.height)
+                            )
+                        end
+                    end
+                else
+                    if thumbfast.width ~= 0 and thumbfast.height ~= 0 then
+                        mp.commandv("script-message-to", "thumbfast", "clear")
+                    end
                 end
             end
 
@@ -2552,6 +2575,16 @@ end
 visibility_mode(user_opts.visibility, true)
 mp.register_script_message('osc-visibility', visibility_mode)
 mp.add_key_binding(nil, 'visibility', function() visibility_mode('cycle') end)
+
+mp.register_script_message("thumbfast-info", function(json)
+    local data = utils.parse_json(json)
+    if type(data) ~= "table" or not data.width or not data.height then
+        msg.error("thumbfast-info: received json didn't produce a table with thumbnail information")
+    else
+        thumbfast = data
+    end
+end)
+    
 
 set_virt_mouse_area(0, 0, 0, 0, 'input')
 set_virt_mouse_area(0, 0, 0, 0, 'window-controls')
