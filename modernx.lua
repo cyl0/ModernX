@@ -33,7 +33,7 @@ local user_opts = {
                                 -- internal track list management (and some
                                 -- functions that depend on it)
     font = 'mpv-osd-symbols',	-- default osc font
-    iconround = false		-- whether to use round icon
+    iconstyle = 'solid',	-- icon style, 'solid' or 'round'
     seekbarhandlesize = 1.0,	-- size ratio of the slider handle, range 0 ~ 1
     seekrange = true,		-- show seekrange overlay
     seekrangealpha = 64,      	-- transparency of seekranges
@@ -144,16 +144,18 @@ local osc_param = { -- calculated by osc_init()
     areas = {},
 }
 
+local iconfont = user_opts.icon == 'round' and 'material-design-iconic-round' or 'material-design-iconic-font'
+
 local osc_styles = {
     TransBg = '{\\blur100\\bord150\\1c&H000000&\\3c&H000000&}',
     SeekbarBg = '{\\blur0\\bord0\\1c&HFFFFFF&}',
     SeekbarFg = '{\\blur1\\bord1\\1c&HE39C42&}',
     VolumebarBg = '{\\blur0\\bord0\\1c&H999999&}',
     VolumebarFg = '{\\blur1\\bord1\\1c&HFFFFFF&}',
-    Ctrl1 = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&HFFFFFF&\\fs36\\fnmaterial-design-iconic-' .. user_opts.iconround and 'round' or 'font' .. '}',
-    Ctrl2 = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&HFFFFFF&\\fs24\\fnmaterial-design-iconic-' .. user_opts.iconround and 'round' or 'font' .. '}',
-    Ctrl2Flip = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&HFFFFFF&\\fs24\\fnmaterial-design-iconic-' .. user_opts.iconround and 'round' or 'font' .. '\\fry180',
-    Ctrl3 = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&HFFFFFF&\\fs24\\fnmaterial-design-iconic-' .. user_opts.iconround and 'round' or 'font' .. '}',
+    Ctrl1 = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&HFFFFFF&\\fs36\\fn' .. iconfont .. '}',
+    Ctrl2 = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&HFFFFFF&\\fs24\\fn' .. iconfont .. '}',
+    Ctrl2Flip = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&HFFFFFF&\\fs24\\fn' .. iconfont .. '\\fry180}',
+    Ctrl3 = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&HFFFFFF&\\fs24\\fn' .. iconfont .. '}',
     Time = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&H000000&\\fs17\\fn' .. user_opts.font .. '}',
     Tooltip = '{\\blur1\\bord0.5\\1c&HFFFFFF&\\3c&H000000&\\fs18\\fn' .. user_opts.font .. '}',
     Title = '{\\blur1\\bord0.5\\1c&HFFFFFF&\\3c&H0\\fs38\\q2\\fn' .. user_opts.font .. '}',
