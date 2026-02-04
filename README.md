@@ -1,7 +1,7 @@
 # ModernX
 An MPV OSC script based on [mpv-osc-modern](https://github.com/maoiscat/mpv-osc-modern/) that aims to mirror the functionality of MPV's stock OSC while with a more modern-looking interface.
 
-![img](https://github.com/cyl0/ModernX/blob/main/preview.png)
+![img](preview.png)
 
 # How to install
 
