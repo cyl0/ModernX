@@ -2317,7 +2317,9 @@ function tick()
             -- animating or starting, or still within 1s past the deadline
             request_tick()
         else
-            kill_animation()
+            state.anistart = nil
+            state.animation = nil
+            state.anitype = nil
         end
     end
 end
